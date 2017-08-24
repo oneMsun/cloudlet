@@ -1,0 +1,548 @@
+/*主体*/
+.weiyun {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+/*遮罩*/
+.move-list-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  /*display: none;*/
+  transform: scale(0);
+  overflow: hidden;
+}
+.move-list-wrap.active{
+  /*display: block;*/
+  transition: 200ms linear;
+  transform: scale(1);
+}
+.move-list-panel {
+  width: 410px;
+  height: 420px;
+  box-sizing: border-box;
+  border: 1px solid #55addc;
+  border-radius: 10px;
+  background-color: #ffffff;
+  position: absolute;
+  left: calc(50% - 205px);
+  top: calc(50% - 210px);
+  display: flex;
+  flex-direction: column;
+}
+.move-list-header {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 20px;
+  border-bottom: 1px solid #55addc;
+  cursor: move;
+}
+.move-list-header h3 {
+  font-size: 16px;
+}
+.move-list-header span {
+  width: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+}
+.move-list-menu-wrap {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*border-bottom: 1px solid #55addc;*/
+}
+.move-list-menu {
+  border: 1px solid #e1e8ed;
+  width: 358px;
+  height: 240px;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 18px 10px;
+  box-sizing: border-box;
+}
+.move-list-menu ul {
+  min-width: 260px;
+  box-sizing: border-box;
+  /*padding: 0 20px;*/
+}
+.move-list-menu ul li {
+  cursor: pointer;
+  margin: 2px 0;
+}
+.move-list-menu ul h2 {
+  float: left;
+  height: 20px;
+  font:   16px/20px arial;
+  padding: 4px 5px;
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+.move-list-menu ul h2.active {
+  border: 2px solid rgba(130, 189, 227, 0.8);
+  background-color: rgba(130, 189, 227, 0.4);
+}
+.move-list-menu ul h2.checked {
+  border: 2px solid rgba(73, 212, 133, 0.8);
+  background-color: rgba(73, 212, 133, 0.4);
+}
+.move-list-menu ul h2:hover {
+  border: 2px solid rgba(130, 189, 227, 0.8);
+  background-color: rgba(130, 189, 227, 0.4);
+}
+.move-list-menu ul ul {
+  float: left;
+  margin-left: 20px;
+  display: -none;
+}
+.move-list-menu ul ul.active {
+  display: block;
+}
+.move-list-menu ul h2 span.add {
+  width: 10px;
+  height: 10px;
+  background: url(../img/folder-tree.png) no-repeat 0 -50px;
+  margin-right: 10px;
+  transform: rotate(-90deg);
+}
+.move-list-menu ul h2 span.active {
+  transform: rotate(0deg);
+}
+.move-list-menu ul h2 i.add {
+  width: 16px;
+  height: 16px;
+  background: url(../img/folder-tree.png) no-repeat 0 0;
+  margin-right: 10px;
+}
+.move-list-menu ul h2 i.active {
+  background: url(../img/folder-tree.png) no-repeat 0 -24px;
+}
+.move-list-btns {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.move-list-btns button {
+  width: 80px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px solid #55addc;
+  display: flex;
+  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  color: #55addc;
+}
+.move-list-btns button:hover {
+  background-color: #55addc;
+  color: #ffffff;
+}
+.move-list-btns button.sure {
+  margin-right: 12px;
+}
+.move-list-btns button.cancel {
+  margin-left: 12px;
+}
+
+/*头部*/
+.weiyun-header {
+  width: 100%;
+  height: 70px;
+  background: #ffffff;
+  position: relative;
+}
+
+/*提示框*/
+.weiyun-header .tip {
+  position: absolute;
+  left: 50%;
+  /*top: 14px;*/
+  top: -70px;
+  transform: translateX(-50%);
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 50px;
+  text-align: center;
+  font: 18px/40px Arial;
+  color: #fff;
+  transition: top 450ms linear;
+}
+.weiyun-header .tip.succ {
+  top: 14px;
+  background: #86ce8b;
+}
+.weiyun-header .tip.fail {
+  top: 14px;
+  background: #ef8989;
+}
+
+
+.weiyun-header h1 {
+  float: left;
+  width: 95px;
+  height: 100%;
+  position: relative;
+  left: 30px;
+  background: url(../img/logo.png) no-repeat center center;
+}
+
+.weiyun-header .user {
+  width: 120px;
+  height: 100%;
+  float: right;
+  position: relative;
+  right: 30px;
+  background: url(../img/user.png) no-repeat center center;
+}
+
+/*功能按钮区*/
+.weiyun-contrls {
+  width: 100%;
+  height: 58px;
+  border-top: 1px slid #d0d9de;
+  border-bottom: 1px slid #d0d9de;
+  background-color: #ecf0f6;
+  padding-left: 10px;
+}
+.weiyun-contrls a {
+  float: left;
+  height: 38px;
+  box-sizing: border-box;
+  border: 1px solid #55addc;
+  border-radius: 5px;
+  text-align: center;
+  color: #55addc;
+  font: 14px/16px Arial;
+  padding: 10px 20px;
+  margin: 10px 10px;
+}
+.weiyun-contrls a:hover {
+  transition: .3s;
+  color: #000000;
+  background-color: #ffffff;
+}
+
+/*主体部分*/
+.weiyun-body {
+  width: 100%;
+  flex: 1;
+  display: flex;
+}
+
+/*主体导航左侧菜单*/
+.weiyun-list-tree {
+  width: 260px;
+  box-sizing: border-box;
+  border-right: 1px solid #d0d9de;
+  overflow: auto;
+  white-space: nowrap;
+  padding: 18px 10px;
+}
+.weiyun-list-tree ul {
+  min-width: 260px;
+  box-sizing: border-box;
+  /*padding: 0 20px;*/
+}
+.weiyun-list-tree ul li {
+  cursor: pointer;
+  margin: 2px 0;
+}
+.weiyun-list-tree ul h2 {
+  float: left;
+  height: 20px;
+  font:   16px/20px arial;
+  padding: 4px 5px;
+  display: flex;
+  /*justify-content: center;*/
+  align-items: center;
+  border: 2px solid rgba(0, 0, 0, 0);
+}
+.weiyun-list-tree ul h2.active {
+  border: 2px solid rgba(130, 189, 227, 0.8);
+  background-color: rgba(130, 189, 227, 0.4);
+}
+.weiyun-list-tree ul h2:hover {
+  border: 2px solid rgba(130, 189, 227, 0.8);
+  background-color: rgba(130, 189, 227, 0.4);
+}
+.weiyun-list-tree ul ul {
+  float: left;
+  margin-left: 20px;
+  display: -none;
+}
+.weiyun-list-tree ul ul.active {
+  display: block;
+}
+.weiyun-list-tree ul h2 span.add {
+  width: 10px;
+  height: 10px;
+  background: url(../img/folder-tree.png) no-repeat 0 -50px;
+  margin-right: 10px;
+  transform: rotate(-90deg);
+}
+.weiyun-list-tree ul h2 span.active {
+  transform: rotate(0deg);
+}
+.weiyun-list-tree ul h2 i.add {
+  width: 16px;
+  height: 16px;
+  background: url(../img/folder-tree.png) no-repeat 0 0;
+  margin-right: 10px;
+}
+.weiyun-list-tree ul h2 i.active {
+  background: url(../img/folder-tree.png) no-repeat 0 -24px;
+}
+
+/*主体文件区域*/
+.weiyun-list-container {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+/*导航栏区域*/
+.weiyun-list-navs {
+  width: 100%;
+  height: 48px;
+  border-bottom: 2px solid #d0d9de;
+  display: flex;
+}
+/*导航菜单全选按钮*/
+.weiyun-list-navs .file-select-all {
+  width: 60px;
+  height: 100%;
+  position: relative;
+}
+.weiyun-list-navs .file-checkbox-all {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+  border: 1px solid #d0d9de;
+  cursor: pointer;
+}
+.weiyun-list-navs .file-checkbox-all.active {
+  background: rgb(57, 196, 233) url(../img/folder-tree.png) no-repeat 3px -100px;
+}
+/*导航显示区域*/
+.weiyun-list-navs .file-navs-list {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+}
+.weiyun-list-navs .file-navs-list span {
+  float: left;
+  height: 48px;
+  padding: 0 16px;
+  position: relative;
+  margin-right: 10px;
+  text-align: center;
+  font-weight: 500;
+  line-height: 48px;
+  cursor: pointer;
+}
+
+.weiyun-list-navs .file-navs-list span:after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: -20px;
+  background: url(../img/folder-tree.png) no-repeat 0 -58px;
+}
+.weiyun-list-navs .file-navs-list span.active {
+  border-bottom: 1px solid #55addc;
+  color: #55addc;
+}
+.weiyun-list-navs .file-navs-list span:hover {
+  transition: 0.5s;
+  color: red;
+  border-bottom: 1px solid #55addc;
+}
+
+/*文件显示区域*/
+.weiyun-list-file {
+  flex: 1;
+  overflow-y: auto;
+  position: relative;
+}
+
+/*画框*/
+.weiyun-list-file .frame{
+  position: absolute;
+  width: 0;
+  height: 0;
+  left: -9999px;
+  border: 1px dotted #000;
+  background-color: rgba(120, 205, 228, 0.6);
+}
+.weiyun-file {
+  width: 180px;
+  height: 180px;
+  float: left;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0);
+  border-radius: 8px;
+  margin: 20px 0 0 20px;
+  position: relative;
+  background-color: #ebeff0;
+}
+.weiyun-file.active {
+  border: 1px solid #55addc;
+  background-color: #ffffff;
+}
+.weiyun-file:hover {
+  border: 1px solid #55addc;
+  background-color: #ffffff;
+}
+.weiyun-file .file-checkbox {
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: 1px solid #55addc;
+  display: none;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  cursor: pointer;
+}
+.weiyun-file:hover .file-checkbox {
+  display: block;
+}
+.weiyun-file.active .file-checkbox {
+  display: block;
+  background: #55addc url(../img/folder-tree.png) no-repeat 3px -100px;
+}
+.weiyun-file .file-img {
+  width: 80px;
+  height: 72px;
+  background: url(../img/file.png) no-repeat 0 0;
+  position: absolute;
+  left: 50px;
+  top: 32px;
+}
+.weiyun-file .file-name {
+  /*width: 120px;*/
+  height: 30px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  top: 122px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+}
+.weiyun-file .file-name .file-show-name {
+  display: none;
+  width: 120px;
+  height: 100%;
+  text-align: center;
+  font: 16px/1em Arial;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.weiyun-file .file-name .file-change-name {
+  display: none;
+  width: 120px;
+  height: 100%;
+  border: 1px solid #55addc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+.weiyun-file .file-name .active {
+  display: block;
+}
+
+/*文件右键菜单*/
+.fileRightMenu {
+  position: absolute;
+  border: 1px solid #dde0e4;
+  border-radius: 5px;
+  box-shadow: 0 0 8px #ccc;
+  background-color: #fff;
+}
+.fileRightMenu a {
+  display: block;
+  cursor: default;
+  height: 30px;
+  line-height: 30px;
+  white-space: nowrap;
+  padding: 0 50px 0 50px;
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+}
+.fileRightMenu a:hover {
+  background-color: #55addc;
+  color: #fff;
+}
+.fileRightMenu a.botbor {
+  padding: 0;
+  margin: 5px 0;
+  height: 1px;
+  line-height: 0;
+  font-size: 0!important;
+  background-color: #e9e9e9;
+  cursor: default;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

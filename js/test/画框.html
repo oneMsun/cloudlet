@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <style>
+    .wrap {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      width: 100%;
+      height: 80px;
+      border-bottom: 2px solid #000;
+      background-color: rgba(11, 152, 190, 0.7);
+    }
+    .container {
+      width: 100%;
+      flex: 1;
+      display: flex;
+    }
+    .left {
+      width: 200px;
+      height: 100%;
+      border-right: 2px solid #000;
+      background-color: rgba(138, 254, 157, 0.75);
+    }
+    .right {
+      flex: 1;
+      height: 100%;
+      position: relative;
+    }
+    .kuang {
+      width: 0;
+      height: 0;
+      left: -999px;
+      z-index: 9999;
+      position: absolute;
+      border: 1px dotted rgba(82, 185, 218, 0.88);
+      background-color: rgba(82, 185, 218, 0.3);
+    }
+    .folder {
+      width: 200px;
+      height: 200px;
+      margin: 30px;
+      background: rgba(240, 84, 233, 0.67);
+      text-align: center;
+      font-size: 20px;
+      color: #fff;
+      line-height: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="header"></div>
+    <div class="container">
+      <div class="left"></div>
+      <div class="right">
+        <div class="folder">
+          文件夹
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    var right = document.querySelector('.right');
+    
+    right.onmousedown = function (e){
+      var target = e.target;
+      
+      if(target.classList.contains('folder')){
+        return;
+      }
+      
+      e.preventDefault();
+      
+      var startX = e.pageX, startY = e.pageY;
+      
+      var div = document.createElement('div');
+      div.className = 'kuang';
+      this.appendChild(div);
+      
+      this.onmousemove = function (e){
+        var moveX = e.pageX, moveY = e.pageY;
+        
+        var L = Math.min(moveX - getRect(right, 'left'), startX - getRect(right, 'left') );
+        var T = Math.min(moveY - getRect(right, 'top'), startY - getRect(right, 'top') );
+        var W = Math.abs(moveX - startX);
+        var H = Math.abs(moveY - startY);
+        
+        pengzhuang(div);
+        
+        div.style.left = L + 'px';
+        div.style.top = T + 'px';
+        div.style.width = W + 'px';
+        div.style.height = H + 'px';
+      };
+      
+      document.onmouseup = function (){
+        this.onmouseup = right.onmousemove = null;
+        right.removeChild(div);
+      }
+    };
+    
+    function pengzhuang(ele){
+      for(var i=0; i<right.children.length; i++){
+        if(duang(ele, right.children[i]) && right.children[i] != ele){
+          // console.log(1);
+          // ele ===> data.checked = true
+          // ele.classList.add('active');
+          // if(全选了){
+          //   做点什么。。。
+          // }
+        }else{
+          // if( // 如果这个元素有 某个 class){
+          //   // ele ===> data.checked = false;
+          //   // ele.classList.remove('active');
+          // }
+        }
+      }
+    }
+    
+    function getRect(obj, type){
+      var rect = obj.getBoundingClientRect();
+      switch(type){
+        case 'left':
+          return rect.left;
+        break;
+        case 'top':
+          return rect.top;
+        break;
+        case 'right':
+          return rect.right;
+        break;
+        case 'bottom':
+          return rect.bottom;
+        break;
+      }
+    };
+    
+    function duang(current, target){
+      var currentRect = current.getBoundingClientRect();
+      var targetRect = target.getBoundingClientRect();
+      var currentLeft = currentRect.left, 
+          currentTop = currentRect.top,
+          currentRight = currentRect.right,
+          currentBottom = currentRect.bottom;
+      var targetLeft = targetRect.left, 
+          targetTop = targetRect.top,
+          targetRight = targetRect.right,
+          targetBottom = targetRect.bottom;
+      return currentRight > targetLeft && currentBottom > targetTop && currentLeft < targetRight && currentTop < targetBottom;
+    };
+
+  
+  </script>
+</body>
+</html>

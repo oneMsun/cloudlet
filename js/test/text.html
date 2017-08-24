@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    移动到：
+      当点击移动到按钮的时候：
+        1 当前是否有选中的文件，如果没有不能移动
+        2 当前选中的文件是否在根目录，如果在根目录并且选中了所有文件，那么是不能移动的
+        3 如果当前选中的文件被移动到的目标是当前目录是不能移动的
+        4 被选中的文件不能移动到自己的子目录
+        5 如果选中的文件移动到目标目录，但是名字有冲突的处理：
+            1 如果有重名的 问： 是否覆盖？ 如果是就直接覆盖（让当前被移动的数据覆盖目标文件目录的数据）
+              否：
+            2 问是否保留两者？  是： 保留两者，将名字添加一个后缀
+              否：什么都不干，不移动这个数据了
+  
+  
+  </script>
+</body>
+</html>

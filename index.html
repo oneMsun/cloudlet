@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>微云</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="weiyun">
+    <!-- 头部logo和功能按钮 -->
+    <div class="weiyun-header">
+        <h1 title="Miaov"></h1>
+        <div class="user"></div>
+        <div class="tip"></div>
+    </div>
+    <!-- 功能按钮区 -->
+    <div class="weiyun-contrls">
+      <div class="contrls-btns">
+        <a href="javascript:;" class="create-new-folder">新建文件夹</a>
+        <a href="javascript:;" class="delete-files">删除</a>
+        <a href="javascript:;" class="move-files-to">移动到</a>
+        <a href="javascript:;" class="rename-files">重命名</a>
+      </div>
+      <div class="contrls-right"></div>
+    </div>
+    <!-- 主体部分 -->
+    <div class="weiyun-body">
+      <!-- 左侧树状菜单 -->
+      <div class="weiyun-list-tree">
+        <!-- <ul class="weiyun-outer-menu">
+          <li>
+            <h2><span class="add"></span><i class="add active"></i>我的歌曲</h2>
+            <ul>
+              <li>
+                <h2><span></span><i class="add"></i>周杰伦</h2>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <h2><span></span><i class="add"></i>我的电影</h2>
+          </li>
+        </ul> -->
+      </div> 
+      <!-- 右侧内容部分 -->
+      <div class="weiyun-list-container">
+        <!-- 文件导航栏 -->
+        <div class="weiyun-list-navs">
+          <div class="file-select-all">
+            <span class="file-checkbox-all"></span>
+          </div>
+          <div class="file-navs-list">
+            <!-- <span class="active">微云</span> -->
+          </div>
+        </div>
+        <!-- 显示文件区域 -->
+        <div class="weiyun-list-file">
+          <!-- 文件结构 -->
+          <!-- <div class="weiyun-file">
+            <span class="file-checkbox active"></span>
+            <div class="file-img"></div>
+            <div class="file-name">
+              <span class="file-show-name active" title="新建文件夹">新建文件夹</span>
+              <input type="text" class="file-change-name">
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="move-list-wrap">
+      <div class="move-list-panel">
+        <div class="move-list-header">
+          <h3>请选择储存位置</h3>
+          <span>X</span>
+        </div>
+        <div class="move-list-menu-wrap">
+          <div class="move-list-menu">
+            
+          </div>
+        </div>
+        <div class="move-list-btns">
+          <button class="sure">确定</button>
+          <button class="cancel">取消</button>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="fileRightMenu">
+      <a href="">打开</a>
+      <a href="" class="botbor"></a>
+      <a href="">移动到</a>
+      <a href="">重命名</a>
+      <a href="" class="botbor"></a>
+      <a href="">删除</a>
+      <a href="">属性</a>
+    </div>
+    <div class="fileListRightMenu"></div> -->
+  </div>
+  <script>
+    document.body.onselectstart = function (){
+      return false;
+    };
+  </script>
+  <script src="js/data.js"></script>
+  <script src="js/tools.js"></script>
+  <script src="js/createHtml.js"></script>
+  <script src="js/rightMenu.js"></script>
+  <script src="js/view.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

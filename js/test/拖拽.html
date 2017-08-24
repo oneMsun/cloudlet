@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title></title>
+  <style>
+    .box {
+      position: absolute;
+      width: 800px;
+      height: 600px;
+      left: 100px;
+      top: 50px;
+      border: 1px solid #000;
+    }
+    .draBox {
+      width: 300px;
+      height: 360px;
+      border: 2px solid #000;
+      border-radius: 10px;
+      position: absolute;
+      left: calc(50% - 150px);
+      top: calc(50% - 180px);
+      display: flex;
+      flex-direction: column;
+    }
+    .header {
+      width: 100%;
+      height: 50px;
+      border-bottom: 1px solid #000;
+      background-color: rgba(184, 178, 249, 0.83);
+      cursor: move;
+    }
+    .footer {
+      width: 100%;
+      flex: 1;
+      background-color: rgba(54, 189, 44, 0.63);
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="draBox">
+      <div class="header"></div>
+      <div class="footer"></div>
+    </div>
+  </div>
+  <script>
+    var dragBox = document.querySelector('.draBox');
+    var header = document.querySelector('.header');
+    
+    drapEle(header, dragBox, true)
+    
+    
+    function drapEle(eleDown, eleMove, scope){
+      eleDown.onmousedown = function (e){
+        e.preventDefault();
+        var dx = e.pageX - getRect(eleMove, 'left');
+        var dy = e.pageY - getRect(eleMove, 'top');
+        document.onmousemove = function (e){
+          var L = e.pageX - dx - getRect(eleMove.offsetParent, 'left');
+          var T = e.pageY - dy - getRect(eleMove.offsetParent, 'top');
+          
+          if(scope){
+            L = L <=0 ? 0 : L;
+            T = T <=0 ? 0 : T;
+            L = L > eleMove.offsetParent.clientWidth - eleMove.offsetWidth ? eleMove.offsetParent.clientWidth - eleMove.offsetWidth : L;
+            T = T > eleMove.offsetParent.clientHeight - eleMove.offsetHeight ? eleMove.offsetParent.clientHeight - eleMove.offsetHeight : T;
+          }
+          
+          eleMove.style.left = L + 'px';
+          eleMove.style.top = T + 'px';
+        };
+        document.onmouseup = function (){
+          this.onmouseup = this.onmousemove = null;
+        }
+      };
+    }
+    
+    // var scope = false;
+    
+    // header.onmousedown = function (e){
+    //   e.preventDefault();
+    //   var dx = e.pageX - getRect(dragBox, 'left');
+    //   var dy = e.pageY - getRect(dragBox, 'top');
+    //   document.onmousemove = function (e){
+    //     var L = e.pageX - dx - getRect(dragBox.offsetParent, 'left');
+    //     var T = e.pageY - dy - getRect(dragBox.offsetParent, 'top');
+    //     
+    //     if(scope){
+    //       L = L <=0 ? 0 : L;
+    //       T = T <=0 ? 0 : T;
+    //       L = L > dragBox.offsetParent.clientWidth - dragBox.offsetWidth ? dragBox.offsetParent.clientWidth - dragBox.offsetWidth : L;
+    //       T = T > dragBox.offsetParent.clientHeight - dragBox.offsetHeight ? dragBox.offsetParent.clientHeight - dragBox.offsetHeight : T;
+    //     }
+    //     
+    //     dragBox.style.left = L + 'px';
+    //     dragBox.style.top = T + 'px';
+    //   };
+    //   document.onmouseup = function (){
+    //     this.onmouseup = this.onmousemove = null;
+    //   }
+    // };
+    
+    function getRect(obj, type){
+      var rect = obj.getBoundingClientRect();
+      switch(type){
+        case 'left':
+          return rect.left;
+        break;
+        case 'top':
+          return rect.top;
+        break;
+        case 'right':
+          return rect.right;
+        break;
+        case 'bottom':
+          return rect.bottom;
+        break;
+      }
+    };
+  
+  
+  
+  </script>
+</body>
+</html>
